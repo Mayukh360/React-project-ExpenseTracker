@@ -1,38 +1,39 @@
-import ExpenseItem from "./Components/ExpenseItem";
+import ExpenseItem from "./Components/Expenses/ExpenseItem";
+
 
 function App() {
   const expenses = [
     {
       id: "e1",
       title: "Toilet Paper",
-      amount: 94.12,
-      date: new Date(2020, 7, 14),
-      location: "Office",
+      amount: 90,
+      date: new Date(2022, 7, 14),
+      location: "Shop",
     },
     {
       id: "e2",
       title: "New TV",
-      amount: 799.49,
-      date: new Date(2021, 2, 12),
-      location: "Shooping Mall",
+      amount: 37999,
+      date: new Date(2021, 9, 12),
+      location: "Shopping Mall",
     },
     {
       id: "e3",
       title: "Car Insurance",
-      amount: 294.67,
-      date: new Date(2021, 2, 28),
-      location: "Shop",
+      amount: 800,
+      date: new Date(2022, 2, 28),
+      location: "Garage",
     },
     {
       id: "e4",
       title: "New Desk (Wooden)",
-      amount: 450,
-      date: new Date(2021, 5, 12),
+      amount: 1450,
+      date: new Date(2022, 5, 12),
       location: "Carpenter",
     },
   ];
   return (
-    <div>
+    <div >
       <h2>Lets Get Started</h2>
       {expenses.map((expense) => (
         <ExpenseItem
