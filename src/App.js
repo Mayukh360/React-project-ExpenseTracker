@@ -1,4 +1,6 @@
+import React from 'react';
 import ExpenseItem from "./Components/Expenses/ExpenseItem";
+import NewExpense from './Components/newExpense/NewExpense'
 
 
 function App() {
@@ -34,7 +36,7 @@ function App() {
   ];
   return (
     <div >
-      <h2>Lets Get Started</h2>
+      <NewExpense/>
       {expenses.map((expense) => (
         <ExpenseItem
           key={expense.id}
