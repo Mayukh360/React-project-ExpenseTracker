@@ -1,46 +1,59 @@
-import React from 'react';
+import React, { useState } from "react";
 import ExpenseItem from "./Components/Expenses/ExpenseItem";
 import NewExpense from './Components/newExpense/NewExpense'
+import ExpensesFilter from './Components/Expenses/ExpensesFilter.js'
 
+const DummyExpenses = [
+  {
+    id: "e1",
+    title: "Toilet Paper",
+    amount: 90,
+    date: new Date(2022, 7, 14),
+    location: "Shop",
+  },
+  {
+    id: "e2",
+    title: "New TV",
+    amount: 37999,
+    date: new Date(2021, 9, 12),
+    location: "Shopping Mall",
+  },
+  {
+    id: "e3",
+    title: "Car Insurance",
+    amount: 800,
+    date: new Date(2022, 2, 28),
+    location: "Garage",
+  },
+  {
+    id: "e4",
+    title: "New Desk (Wooden)",
+    amount: 1450,
+    date: new Date(2022, 5, 12),
+    location: "Carpenter",
+  },
+];
+function App(props) {
+  const[filteredYear, setfilteredYear]=useState('2020');
+  const[expenses, setExpenses]=useState(DummyExpenses);
 
-function App() {
-  const expenses = [
-    {
-      id: "e1",
-      title: "Toilet Paper",
-      amount: 90,
-      date: new Date(2022, 7, 14),
-      location: "Shop",
-    },
-    {
-      id: "e2",
-      title: "New TV",
-      amount: 37999,
-      date: new Date(2021, 9, 12),
-      location: "Shopping Mall",
-    },
-    {
-      id: "e3",
-      title: "Car Insurance",
-      amount: 800,
-      date: new Date(2022, 2, 28),
-      location: "Garage",
-    },
-    {
-      id: "e4",
-      title: "New Desk (Wooden)",
-      amount: 1450,
-      date: new Date(2022, 5, 12),
-      location: "Carpenter",
-    },
-  ];
   const addExpenseHandler=(expense)=>{
-    console.log('IN App.js');
-    console.log(expense);
-  }
+    setExpenses((prevExpenses)=>{
+      return [expense, ...prevExpenses]
+    })
+  };
+  
+  
+  const filterChangeHandler=(selectedYear)=>{
+    setfilteredYear(selectedYear);
+  };
+  
   return (
+
     <div >
       <NewExpense onaddExpense={addExpenseHandler}/>
+      
+      <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpensesFilter>
       {expenses.map((expense) => (
         <ExpenseItem
           key={expense.id}
