@@ -58,9 +58,11 @@ function App(props) {
       <NewExpense onaddExpense={addExpenseHandler}/>
       
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpensesFilter>
-      {filteredExpenses.length === 0 ? (
-        <p>No expenses found for the selected year.</p>
-      ) : (
+     {filteredExpenses.length === 0 && <h2>No expenses found for the selected year.</h2>}
+     
+     {filteredExpenses.length === 1 && <h2>Only single Expense here. Please add more...</h2>}
+     
+      { filteredExpenses.length > 0 &&
         filteredExpenses.map((expense) => (
           <ExpenseItem
             key={expense.id}
@@ -70,7 +72,7 @@ function App(props) {
             location={expense.location}
           />
         ))
-      )}
+      }
     </div>
   );
 }
