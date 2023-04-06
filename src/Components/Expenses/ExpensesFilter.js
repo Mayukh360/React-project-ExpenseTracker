@@ -2,12 +2,18 @@ import React from 'react';
 
 import './ExpensesFilter.css';
 
-const ExpensesFilter = () => {
+
+
+const ExpensesFilter = (props) => {
+  const selectChangeHandler = (event) => {
+    props.onChangeFilter(event.target.value);
+  };
+
   return (
-    <div >
-      <div className='.myClass'>
+    <div className='expenses-filter'>
+      <div className='expenses-filter__control'>
         <label>Filter by year</label>
-        <select className='.myClass'>
+        <select value={props.selected} onChange={selectChangeHandler}>
           <option value='2022'>2022</option>
           <option value='2021'>2021</option>
           <option value='2020'>2020</option>
@@ -19,3 +25,4 @@ const ExpensesFilter = () => {
 };
 
 export default ExpensesFilter;
+

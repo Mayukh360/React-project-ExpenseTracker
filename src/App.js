@@ -39,7 +39,7 @@ function App(props) {
 
   const addExpenseHandler=(expense)=>{
     setExpenses((prevExpenses)=>{
-      return [expense, ...prevExpenses]
+      return [expense,...prevExpenses]
     })
   };
   
@@ -47,6 +47,10 @@ function App(props) {
   const filterChangeHandler=(selectedYear)=>{
     setfilteredYear(selectedYear);
   };
+    // Filter expenses by year
+  const filteredExpenses = expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
   
   return (
 
@@ -54,15 +58,19 @@ function App(props) {
       <NewExpense onaddExpense={addExpenseHandler}/>
       
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpensesFilter>
-      {expenses.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-          location={expense.location}
-        />
-      ))}
+      {filteredExpenses.length === 0 ? (
+        <p>No expenses found for the selected year.</p>
+      ) : (
+        filteredExpenses.map((expense) => (
+          <ExpenseItem
+            key={expense.id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+            location={expense.location}
+          />
+        ))
+      )}
     </div>
   );
 }
