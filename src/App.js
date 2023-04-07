@@ -33,7 +33,7 @@ const DummyExpenses = [
     location: "Carpenter",
   },
 ];
-function App(props) {
+function App() {
   const[filteredYear, setfilteredYear]=useState('2020');
   const[expenses, setExpenses]=useState(DummyExpenses);
 
@@ -51,6 +51,21 @@ function App(props) {
   const filteredExpenses = expenses.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
+
+  let expensesContent= <h2>No expenses found for the selected year.</h2>;
+  
+  if(filteredExpenses.length>0){
+   expensesContent= filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+        location={expense.location}
+      />
+    ))
+  }
+  
   
   return (
 
@@ -58,21 +73,8 @@ function App(props) {
       <NewExpense onaddExpense={addExpenseHandler}/>
       
       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpensesFilter>
-     {filteredExpenses.length === 0 && <h2>No expenses found for the selected year.</h2>}
-     
-     {filteredExpenses.length === 1 && <h2>Only single Expense here. Please add more...</h2>}
-     
-      { filteredExpenses.length > 0 &&
-        filteredExpenses.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-            location={expense.location}
-          />
-        ))
-      }
+    {filteredExpenses.length === 1 && <h2>Only single Expense here. Please add more...</h2> }
+     {expensesContent}
     </div>
   );
 }
